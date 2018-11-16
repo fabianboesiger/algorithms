@@ -11,7 +11,7 @@ public class Main {
 		S = new Stack <Integer> ();
 		T = new Stack <Integer> ();
 		
-		int[] a = new int[] {3, 3, 5, 5, 4, 4, 4, 4, 5, 5, 3, 5};
+		int[] a = new int[] {1, 3, 3, 5, 5, 4, 4, 4, 4, 5, 5, 3, 5};
 		for(int i = 0; i < a.length; i++) {
 			S.push(a[i]);
 		}
@@ -45,10 +45,8 @@ public class Main {
 							while(!T.empty() && T.peek() == t) {
 								S.push(T.pop());
 							}
-							c = 1;
-						}else {
-							c = 0;
 						}
+						c = 1;
 					}
 				}else {
 					T.push(s);
