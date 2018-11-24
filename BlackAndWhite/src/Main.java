@@ -50,13 +50,13 @@ public class Main {
 					}
 				}else {
 					// Now the magic happens, it's difficult to explain
+					double q = (double) (m-i)/((m+n)-(j-1));
 					if(i == 0) {
 						/*
 						 * In the first row, the probability is calculated with the probability
 						 * that never a black stone was drawn, multiplied with the probability
 						 * that a black stone is drawn
 						 */
-						double q = (double) (m-i)/((m+n)-(j-1));
 						table[i][j] = table[i][j-1]/q*(1-q) * p;
 					}else {
 						/*
@@ -66,7 +66,6 @@ public class Main {
 						 * cell. This is the probability that this cell gets visited. This probability
 						 * is multiplied with the probability that a black stone gets drawn.
 						 */
-						double q = (double) (m-i)/((m+n)-(j-1));
 						table[i][j] = (table[i][j-1]/q*(1-q) + table[i-1][j-1]) * p;
 					}
 				}
