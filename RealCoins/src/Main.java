@@ -20,26 +20,26 @@ class Main {
 		int N = scanner.nextInt();
 		int K = scanner.nextInt();
 		
-		int sum = 0;
-		int[] coins = new int[N];
-		BigInteger[] counters = new BigInteger[K];
+		BigInteger[] coins = new BigInteger[N+1];
+		BigInteger[] table = new BigInteger[K+1];
 		
+		for(int i = 0; i < N; i++) {
+			coins[i] = BigInteger.valueOf(scanner.nextInt());
+		}
+
 		for(int i = 0; i < K; i++) {
-			counters[i] = BigInteger.valueOf(2);
-		}
-		
-		for(int i = 0; i < N; i++) {
-			coins[i] = scanner.nextInt();
-			sum += coins[i];
-		}
-		
-		for(int i = 0; i < N; i++) {
-			int n = scanner.nextInt();
-			sum += n;
-			for(int j = 0; j < K; j++) {
-				
+				if(BigInteger.valueOf(i+1).compareTo(coins[0]) == 0) {
+					table[i] = BigInteger.ONE;
+				}else {
+					table[i] = BigInteger.ZERO;
+				}
 			}
-			counters[i] = BigInteger.valueOf(n);
+		}
+		
+		for(int j = 0; j < N; j++) {
+			for(int i = K-1; i >= 0; i--) {
+				table[i] = 
+			}
 		}
 		
 		//
@@ -47,7 +47,7 @@ class Main {
 		//
 		// out.println(result.toString());		
 		
-		out.println();
+		out.println("");
 				
 		scanner.close();
 	}

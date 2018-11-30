@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class Main {
 	
-	private static final int BLACKS = 3;
-	private static final int WHITES = 3;
+	private static final int BLACKS = 2;
+	private static final int WHITES = 2;
 	
 	private static final int SIMULATION_ITERATIONS = 10000;
 	
