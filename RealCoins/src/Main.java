@@ -6,6 +6,7 @@
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.math.BigInteger;
 
@@ -20,34 +21,47 @@ class Main {
 		int N = scanner.nextInt();
 		int K = scanner.nextInt();
 		
-		BigInteger[] coins = new BigInteger[N+1];
+		int[] coins = new int[N];
 		BigInteger[] table = new BigInteger[K+1];
 		
 		for(int i = 0; i < N; i++) {
-			coins[i] = BigInteger.valueOf(scanner.nextInt());
-		}
-
-		for(int i = 0; i < K; i++) {
-				if(BigInteger.valueOf(i+1).compareTo(coins[0]) == 0) {
-					table[i] = BigInteger.ONE;
-				}else {
-					table[i] = BigInteger.ZERO;
-				}
-			}
+			coins[i] = scanner.nextInt();
 		}
 		
-		for(int j = 0; j < N; j++) {
-			for(int i = K-1; i >= 0; i--) {
-				table[i] = 
+		for(int i = 1; i < K+1; i++) {
+			table[i] = BigInteger.ZERO;
+		}
+		table[0] = BigInteger.ONE;
+		
+		if(coins[0] <= K) {
+			table[coins[0]] = BigInteger.ONE;
+		}
+				
+		for(int i = 1; i < N; i++) {
+			
+			for(int j = K; j > 0; j--) {
+				if(j-coins[i] >= 0) {
+					table[j] = table[j].add(table[j-coins[i]]);
+				}
 			}
 		}
 		
 		//
 		// Provide your solution here ...
 		//
-		// out.println(result.toString());		
+		// out.println(result.toString());	
 		
-		out.println("");
+		BigInteger output = BigInteger.valueOf(2).pow(N);
+				
+		for(int i = 0; i < K; i++) {
+			output = output.subtract(table[i]).subtract(table[i]);
+		}
+		
+		if(output.compareTo(BigInteger.ZERO) == -1) {
+			out.println(0);
+		}else {
+			out.println(output);
+		}
 				
 		scanner.close();
 	}
