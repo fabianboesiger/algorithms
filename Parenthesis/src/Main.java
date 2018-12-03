@@ -28,8 +28,17 @@ class Main {
 			v[i] = scanner.nextInt();
 			if (op.equals("-")) {
 				v[i] = - v[i];
-			}			
+			}
 		}
+		
+		int output = 0;
+		
+		int[] table = new int[N];
+		for(int i = 0; i < table.length; i++) {
+			
+		}
+		
+		out.println(output);
 				
 		//
 		// Provide your solution here
