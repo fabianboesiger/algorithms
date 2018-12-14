@@ -33,9 +33,17 @@ class Main {
 		
 		int output = 0;
 		
-		int[] table = new int[N];
-		for(int i = 0; i < table.length; i++) {
-			
+		int u[] = new int[N];
+		
+		for(int i = 0; i < v.length-1; i++) {
+			int negative = -(-v[i]+v[i+1]);
+			int positive = (v[i]+v[i+1]);
+			if(negative > positive && v[i] < 0) {
+				u[i] = negative;
+			}else {
+				u[i] = positive;
+			}
+			System.out.println(u[i]);
 		}
 		
 		out.println(output);
