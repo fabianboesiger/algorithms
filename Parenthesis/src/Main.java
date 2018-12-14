@@ -32,11 +32,23 @@ class Main {
 		}
 		
 		int output = 0;
-		
 		int[] table = new int[N];
-		for(int i = 0; i < table.length; i++) {
-			
+		
+		boolean inside = false;
+		
+		for(int i = 0; i < v.length; i++) {
+			if(inside) {
+				if(-v[i] > v[i]) {
+					v[i] = -v[i];
+				}
+			}else {
+				if(v[i] < 0) {
+					inside = true;
+				}
+			}
+			output += v[i];
 		}
+		
 		
 		out.println(output);
 				
