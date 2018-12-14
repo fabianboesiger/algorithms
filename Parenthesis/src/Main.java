@@ -32,14 +32,25 @@ class Main {
 		}
 		
 		int output = 0;
-		int[] table = new int[N];
 		
 		boolean inside = false;
+		int positiveSum = 0;
+		int negativeSum = 0;
 		
 		for(int i = 0; i < v.length; i++) {
+			System.out.println(i+" "+v[i]+" "+inside);
 			if(inside) {
-				if(-v[i] > v[i]) {
+				if(v[i] >= 0) {
+					positiveSum += v[i];
+				}else {
+					negativeSum -= v[i];
+				}
+				if(negativeSum > positiveSum) {
 					v[i] = -v[i];
+				}else {
+					inside = false;
+					positiveSum = 0;
+					negativeSum = 0;
 				}
 			}else {
 				if(v[i] < 0) {

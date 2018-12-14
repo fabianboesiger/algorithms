@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.Random;
 
 public class JUnitTest {
 
@@ -74,7 +75,26 @@ public class JUnitTest {
 	public void testLarge() {
 		checkEquality("test03");
 	}
-
+	/*
+	@Test
+	public void testRandom() {
+		
+		Random r = new Random();
+		int[] n = new int[r.nextInt(100)+1];
+		for(int i = 0; i < n.length; i++) {
+			n[i] = r.nextInt(1000)-500;
+		}
+		
+		for(int i = 0; i < n.length; i++) {
+			for(int j = 0; j < n.length; j++) {
+				for(int k = j; k < n.length; k++) {
+					
+				}
+			}
+		}
+		
+	}
+	*/
 }
 
 
