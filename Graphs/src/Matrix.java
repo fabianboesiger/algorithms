@@ -11,6 +11,10 @@ public class Matrix {
 		this.values = values;
 	}
 	
+	public static Matrix zeroMatrix(int height, int width) {
+		return new Matrix(new int[height][width]);
+	}
+	
 	public int getWidth() {
 		return width;
 	}

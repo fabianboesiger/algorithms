@@ -3,19 +3,7 @@ public class Graph {
 	private Vertex[] vertices;
 	
 	public Graph(Matrix adjacencies) {
-		vertices = new Vertex[adjacencies.getHeight()];
-		for(int i = 0; i < vertices.length; i++) {
-			vertices[i] = new Vertex();
-		}
-		for(int i = 0; i < vertices.length; i++) {
-			for(int j = 0; j < vertices.length; j++) {
-				if(adjacencies.getValue(i, j) != 1) {
-					Edge edge = new Edge(getVertex(i), getVertex(j));
-					getVertex(i).getOut().add(edge);
-					getVertex(j).getIn().add(edge);
-				}
-			}
-		}
+		this(adjacencies, Matrix.zeroMatrix(adjacencies.getHeight(), adjacencies.getWidth()));
 	}
 	
 	public Graph(Matrix adjacencies, Matrix weights) {
@@ -25,7 +13,7 @@ public class Graph {
 		}
 		for(int i = 0; i < vertices.length; i++) {
 			for(int j = 0; j < vertices.length; j++) {
-				if(adjacencies.getValue(i, j) != 1) {
+				if(adjacencies.getValue(i, j) == 1) {
 					Edge edge = new Edge(getVertex(i), getVertex(j), weights.getValue(i, j));
 					getVertex(i).getOut().add(edge);
 					getVertex(j).getIn().add(edge);
