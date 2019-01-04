@@ -32,14 +32,34 @@ class Main {
 		}
 		
 		int output = 0;
-		int layer = -1;
-		int[] inbalance = new int[v.length];
 		
+		boolean inside = false;
+		int positiveSum = 0;
+		int negativeSum = 0;
 		
 		for(int i = 0; i < v.length; i++) {
-			output += Math.abs(v[i]);
+			System.out.println(i+" "+v[i]+" "+inside);
+			if(inside) {
+				if(v[i] >= 0) {
+					positiveSum += v[i];
+				}else {
+					negativeSum -= v[i];
+				}
+				if(negativeSum > positiveSum) {
+					v[i] = -v[i];
+				}else {
+					inside = false;
+					positiveSum = 0;
+					negativeSum = 0;
+				}
+			}else {
+				if(v[i] < 0) {
+					inside = true;
+				}
+			}
+			output += v[i];
 		}
-	
+		
 		
 		out.println(output);
 				
@@ -48,7 +68,7 @@ class Main {
 		//		
 		scanner.close();
 	}
-	
+
 	//
 	// Do not modify the main method, and keep the method read_and_solve
 	// 
