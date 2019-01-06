@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 
-public class AVLTree <T extends Comparable <T>> {
+public class AVLTree <T extends Comparable <T>> implements Retraceable <T> {
 	
 	private Node <T> root;
 	private int size;
 	
 	public AVLTree() {
-		
 	}
 	
 	public int size() {
@@ -18,28 +17,43 @@ public class AVLTree <T extends Comparable <T>> {
 	}
 	
 	public void insert(T value) {
+		System.out.println("Inserting " + value.toString());
 		if(root == null) {
-			root = new Node <T> (value, null);
+			root = new Node <T> (value, this, this);
 		} else {
 			root.insert(value);
 		}
 		size++;
 		print();
+		System.out.println("End of Insertion");
+		System.out.println();
 	}
 	
 	public T remove(T value) {
+		System.out.println("Removing " + value.toString());
 		size--;
 		Node <T> node = find(value);
+		T removed = null;
 		if(node != null) {
-			T removed =  node.remove();
-			print();
-			return removed;
+			removed = node.remove();
 		}
 		print();
-		return null;
+		System.out.println("End of Removal");
+		System.out.println();
+		return removed;
 	}
 	
-	protected Node <T> find(T value) {
+	public void setChild(Node <T> current, Node <T> next) {
+		if(current == root) {
+			root = next;
+		}
+	}
+	
+	public void retrace() {
+		
+	}
+	
+	public Node <T> find(T value) {
 		return root.find(value);
 	}
 	
