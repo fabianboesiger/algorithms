@@ -15,6 +15,7 @@ public class Main {
 		avlTree.print();
 		avlTree.remove(-4);
 		avlTree.print();
+		System.out.println(avlTree.compare(-8, -1));
 	}
 
 }

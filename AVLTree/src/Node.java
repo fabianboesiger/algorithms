@@ -2,6 +2,7 @@ public class Node <T extends Comparable <T>> implements Retraceable <T> {
 	
 	private T value;
 	protected int height;
+	protected int size;
 	protected Retraceable <T> parent;
 	protected Node <T> left;
 	protected Node <T> right;
@@ -12,9 +13,10 @@ public class Node <T extends Comparable <T>> implements Retraceable <T> {
 		this.parent = parent;
 		this.avlTree = avlTree;
 		height = 0;
+		size = 1;
 	}
 	
-	public void insert(T value) {
+	protected void insert(T value) {
 		if(value.compareTo(this.value) == -1) {
 			if(left == null) {
 				left = new Node <T> (value, this, avlTree);
@@ -32,7 +34,24 @@ public class Node <T extends Comparable <T>> implements Retraceable <T> {
 		}
 	}
 	
-	public Node <T> find(T value) {
+	protected int compare(T value, int type) {
+		if(value.compareTo(this.value) == type) {
+			if(type == -1) {
+				if(left != null) {
+					left.compare(value, type);
+				}
+			} else {
+				if(right != null) {
+					return right.compare(value, type);
+				}
+			}
+		} else {
+			return size;
+		}
+		return 0;
+	}
+	
+	protected Node <T> find(T value) {
 		if(value.equals(this.value)) {
 			return this;
 		}
@@ -103,8 +122,8 @@ public class Node <T extends Comparable <T>> implements Retraceable <T> {
 		}
 		parent = child;
 		
-		update();
 		child.update();
+		update();
 		
 		avlTree.print();
 		System.out.println("End of Rotation");
@@ -129,14 +148,18 @@ public class Node <T extends Comparable <T>> implements Retraceable <T> {
 	protected void update() {
 		if(left != null && right != null) {
 			height = Math.max(left.height, right.height) + 1;
+			size = left.size + right.size + 1;
 		} else
 		if(left != null) {
 			height = left.height + 1;
+			size = left.size + 1;
 		} else 
 		if(right != null) {
 			height = right.height + 1;
+			size = right.size + 1;
 		} else {
 			height = 0;
+			size = 1;
 		}
 	}
 	
@@ -188,7 +211,7 @@ public class Node <T extends Comparable <T>> implements Retraceable <T> {
 	}
 	
 	public String toString() {
-		return value.toString() + " ("+ balance()+ ")";
+		return value.toString() + " ("+ size + ")";
 	}
 	
 }

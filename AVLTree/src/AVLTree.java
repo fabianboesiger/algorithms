@@ -16,6 +16,13 @@ public class AVLTree <T extends Comparable <T>> implements Retraceable <T> {
 		return (int) (Math.log(size)/Math.log(2)) + 1;
 	}
 	
+	public int compare(T value, int type) {
+		if(root != null) {
+			return root.compare(value, type);
+		}
+		return 0;
+	}
+	
 	public void insert(T value) {
 		System.out.println("Inserting " + value.toString());
 		if(root == null) {
