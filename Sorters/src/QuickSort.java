@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class QuickSort <T extends Comparable <T>> extends Sorter <T> {
 
 	public QuickSort() {
