@@ -16,11 +16,13 @@ public class Main {
 		sorters.add(new QuickSort <Integer> ());
 		sorters.add(new MergeSort <Integer> ());
 		sorters.add(new HeapSort <Integer> ());
+
 		/*
 		Integer[] array = {1, 7, 4, 9, -1, 6};
 		sorters.get(sorters.size() - 1).sort(array);
 		System.out.println(Arrays.toString(array));
 		*/
+		
 		run(sorters);
 		
 	}
