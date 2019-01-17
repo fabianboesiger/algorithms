@@ -1,6 +1,6 @@
 public class Node <T extends Comparable <T>> implements Retraceable <T> {
 	
-	private T value;
+	protected T value;
 	protected int height;
 	protected int size;
 	protected Retraceable <T> parent;

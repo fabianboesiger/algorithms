@@ -3,8 +3,8 @@ import java.util.Arrays;
 
 public class Main {
 	
-	private static final int ROUNDS = 100;
-	private static final int ARRAY_SIZE = 1000;
+	private static final int ROUNDS = 10;
+	private static final int ARRAY_SIZE = 10000;
 
 	public static void main(String[] args) {
 		
@@ -14,11 +14,13 @@ public class Main {
 		sorters.add(new SelectionSort <Integer> ());
 		sorters.add(new InsertionSort <Integer> ());
 		sorters.add(new QuickSort <Integer> ());
-		
+		sorters.add(new MergeSort <Integer> ());
+		sorters.add(new HeapSort <Integer> ());
+		/*
 		Integer[] array = {1, 7, 4, 9, -1, 6};
 		sorters.get(sorters.size() - 1).sort(array);
 		System.out.println(Arrays.toString(array));
-		
+		*/
 		run(sorters);
 		
 	}
@@ -41,7 +43,13 @@ public class Main {
 					sorted[j] = false;
 				}
 			}
+			long added = 0;
+			for(int j = 0; j < sorters.size(); j++) {
+				added += times[j];
+			}
+			System.out.println(Math.round((ROUNDS - i) * added / (i + 1) / 1000.0) + "s remaining");
 		}
+		System.out.println();
 		for(int i = 0; i < sorters.size(); i++) {
 			System.out.println(sorters.get(i).name+": " + (double) times[i] / ROUNDS + "ms, " + (sorted[i] ? "sorted": "unsorted"));
 		}

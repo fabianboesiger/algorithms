@@ -9,7 +9,7 @@ public class QuickSort <T extends Comparable <T>> extends Sorter <T> {
 		sort(array, 0, array.length);
 	}
 	
-	public void sort(T[] array, int l, int r) {
+	private void sort(T[] array, int l, int r) {
 		if(l < r - 1) {
 			int p = r - 1;
 			int i = l;
