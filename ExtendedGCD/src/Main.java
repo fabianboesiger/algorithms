@@ -16,9 +16,12 @@ public class Main {
 		int s2 = b;
 		int u2 = 0;
 		int v2 = 1;
-
+		
+		System.out.println("u1\tu2\tv1\tv2\tq");
+		
 		while(s2 > 0) {
 			int q = s1/s2;
+			System.out.println(u1 + "\t" + u2 + "\t" + v1 + "\t" + v2 + "\t" + q);
 
 			int st = s2;
 			int ut = u2;
