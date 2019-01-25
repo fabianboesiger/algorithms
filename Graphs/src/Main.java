@@ -93,7 +93,36 @@ public class Main {
 	}
 	
 	static HashMap <Vertex, Integer> dijkstra(Graph graph, Vertex start){
-		return null;
+		HashMap <Vertex, Integer> distances = new HashMap <Vertex, Integer> ();
+		HashSet <Vertex> vertices = new HashSet <Vertex> ();
+
+		for(Vertex vertex : graph.getVertices()) {
+			distances.put(vertex, null);
+			vertices.add(vertex);
+		}
+		distances.put(start, 0);
+		
+		while(!vertices.isEmpty()) {
+			Vertex nearest = null;
+			for(Vertex vertex : vertices) {
+				if(distances.get(vertex) != null && (nearest == null || (distances.get(nearest) == null || distances.get(vertex) < distances.get(nearest)))) {
+					nearest = vertex;
+				}
+			}
+			vertices.remove(nearest);
+			
+			for(Edge edge : nearest.getOut()) {
+				Vertex to = edge.getTo();
+				if(vertices.contains(to)) {
+					int alternativeDistance = distances.get(nearest) + edge.getWeight();
+					if(distances.get(to) == null || alternativeDistance > distances.get(to)) {
+						distances.put(to, alternativeDistance);
+					}
+				}
+			}
+		}
+		
+		return distances;
 	}
 	
 
