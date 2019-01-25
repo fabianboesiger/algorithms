@@ -7,9 +7,17 @@ public class Graph {
 	}
 	
 	public Graph(Matrix adjacencies, Matrix weights) {
+		this(adjacencies, weights, new String[adjacencies.getHeight()]);
+	}
+	
+	public Graph(Matrix adjacencies, String[] names) {
+		this(adjacencies, Matrix.zeroMatrix(adjacencies.getHeight(), adjacencies.getWidth()), new String[adjacencies.getHeight()]);
+	}
+	
+	public Graph(Matrix adjacencies, Matrix weights, String[] names) {
 		vertices = new Vertex[adjacencies.getHeight()];
 		for(int i = 0; i < vertices.length; i++) {
-			vertices[i] = new Vertex();
+			vertices[i] = new Vertex(names[i]);
 		}
 		for(int i = 0; i < vertices.length; i++) {
 			for(int j = 0; j < vertices.length; j++) {
@@ -37,6 +45,10 @@ public class Graph {
 	
 	public int getVerticesSize() {
 		return vertices.length;
+	}
+	
+	public Vertex[] getVertices() {
+		return vertices;
 	}
 	
 }
