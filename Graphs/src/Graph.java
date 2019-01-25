@@ -11,7 +11,7 @@ public class Graph {
 	}
 	
 	public Graph(Matrix adjacencies, String[] names) {
-		this(adjacencies, Matrix.zeroMatrix(adjacencies.getHeight(), adjacencies.getWidth()), new String[adjacencies.getHeight()]);
+		this(adjacencies, Matrix.zeroMatrix(adjacencies.getHeight(), adjacencies.getWidth()), names);
 	}
 	
 	public Graph(Matrix adjacencies, Matrix weights, String[] names) {
@@ -49,6 +49,18 @@ public class Graph {
 	
 	public Vertex[] getVertices() {
 		return vertices;
+	}
+	
+	public String toString() {
+		String output = "";
+		for(Vertex vertex : vertices) {
+			output += "\n";
+			output += (vertex + ":");
+			for(Edge edge : vertex.getOut()) {
+				output += (" " + edge);
+			}
+		}
+		return output.substring(1);
 	}
 	
 }

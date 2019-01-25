@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Main {
 
@@ -32,8 +34,9 @@ public class Main {
 		System.out.println(prim(realGraph, realGraph.getVertex(0)));
 		System.out.println(bellmanFord(realGraph, realGraph.getVertex(0)));
 		System.out.println(dijkstra(naturalGraph, naturalGraph.getVertex(0)));
+		System.out.println(breadthFirst(unweightedGraph, unweightedGraph.getVertex(0)));
 	}
-	
+		
 	static HashSet <Edge> prim(Graph graph, Vertex start) {
 		HashSet <Edge> edges = new HashSet <Edge> ();
 		HashSet <Edge> potentialEdges = new HashSet <Edge> ();
@@ -125,5 +128,32 @@ public class Main {
 		return distances;
 	}
 	
+	static HashMap <Vertex, Integer> breadthFirst(Graph graph, Vertex start) {
+		HashMap <Vertex, Integer> distances = new HashMap <Vertex, Integer> ();
+		LinkedList <Vertex> vertices = new LinkedList <Vertex> ();
+		HashSet <Vertex> visited = new HashSet <Vertex> ();
+		
+		for(Vertex vertex : graph.getVertices()) {
+			distances.put(vertex, null);
+		}
+		distances.put(start, 0);
+		vertices.add(start);
+		
+		int counter = 0;
+		while(vertices.size() > 0) {
+			Vertex vertex = vertices.pop();
+			counter++;
+			for(Edge edges : vertex.getOut()) {
+				Vertex to = edges.getTo();
+				if(!visited.contains(to)) {
+					vertices.add(to);
+					distances.put(to, counter);
+					visited.add(to);
+				}
+			}
+		}
+		
+		return distances;
+	}
 
 }
