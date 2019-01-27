@@ -3,26 +3,18 @@ public class Graph {
 	private Vertex[] vertices;
 	
 	public Graph(Matrix adjacencies) {
-		this(adjacencies, Matrix.zeroMatrix(adjacencies.getHeight(), adjacencies.getWidth()));
-	}
-	
-	public Graph(Matrix adjacencies, Matrix weights) {
-		this(adjacencies, weights, new String[adjacencies.getHeight()]);
+		this(adjacencies, new String[adjacencies.getHeight()]);
 	}
 	
 	public Graph(Matrix adjacencies, String[] names) {
-		this(adjacencies, Matrix.zeroMatrix(adjacencies.getHeight(), adjacencies.getWidth()), names);
-	}
-	
-	public Graph(Matrix adjacencies, Matrix weights, String[] names) {
 		vertices = new Vertex[adjacencies.getHeight()];
 		for(int i = 0; i < vertices.length; i++) {
 			vertices[i] = new Vertex(names[i]);
 		}
 		for(int i = 0; i < vertices.length; i++) {
 			for(int j = 0; j < vertices.length; j++) {
-				if(adjacencies.getValue(i, j) == 1) {
-					Edge edge = new Edge(getVertex(i), getVertex(j), weights.getValue(i, j));
+				if(adjacencies.getValue(i, j) != 0) {
+					Edge edge = new Edge(getVertex(i), getVertex(j), adjacencies.getValue(i, j));
 					getVertex(i).getOut().add(edge);
 					getVertex(j).getIn().add(edge);
 				}

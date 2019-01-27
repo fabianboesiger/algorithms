@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		String[] names = new String[] {"A", "B", "C", "D"};
-		Matrix adjacencies = new Matrix(new int[][] {
+		Matrix noWeights = new Matrix(new int[][] {
 			{0, 1, 0, 1},
 			{1, 0, 1, 0},
 			{1, 0, 0, 0},
@@ -25,15 +25,16 @@ public class Main {
 			{1, 0, 0, 0},
 			{0, 2, 0, 0}
 		});
-		
-		Graph unweightedGraph = new Graph(adjacencies, names);
-		Graph realGraph = new Graph(adjacencies, realWeights, names);
-		Graph naturalGraph = new Graph(adjacencies, naturalWeights, names);
+	
+		Graph unweightedGraph = new Graph(noWeights, names);
+		Graph realGraph = new Graph(realWeights, names);
+		Graph naturalGraph = new Graph(naturalWeights, names);
 		
 		System.out.println(prim(realGraph, realGraph.getVertex(0)));
 		System.out.println(bellmanFord(realGraph, realGraph.getVertex(0)));
 		System.out.println(dijkstra(naturalGraph, naturalGraph.getVertex(0)));
 		System.out.println(breadthFirst(unweightedGraph, unweightedGraph.getVertex(0)));
+		System.out.println(floydWarshall(realGraph));
 	}
 		
 	static HashSet <Edge> prim(Graph graph, Vertex start) {
@@ -154,5 +155,42 @@ public class Main {
 		
 		return distances;
 	}
-
+	
+	static HashMap <Vertex, HashMap <Vertex, Integer>> floydWarshall(Graph graph) {
+		HashMap <Vertex, HashMap <Vertex, Integer>> table = new HashMap <Vertex, HashMap <Vertex, Integer>> ();
+		for(Vertex vertex : graph.getVertices()) {
+			table.put(vertex, new HashMap <Vertex, Integer> ());
+			table.get(vertex).put(vertex, 0);
+			for(Edge edge : vertex.getOut()) {
+				table.get(vertex).put(edge.getTo(), edge.getWeight());
+			}
+		}
+		
+		for(int k = 0; k < graph.getVerticesSize(); k++) {
+			for(int i = 0; i < graph.getVerticesSize(); i++) {
+				for(int j = 0; j < graph.getVerticesSize(); j++) {
+					Integer ik = table.get(graph.getVertex(i)).get(graph.getVertex(k));
+					Integer kj = table.get(graph.getVertex(k)).get(graph.getVertex(j));
+					Integer ij = table.get(graph.getVertex(i)).get(graph.getVertex(j));
+					if(ik != null && kj != null && (ij == null || ik+kj < ij)) {
+						table.get(graph.getVertex(i)).put(graph.getVertex(j), ik+kj);
+					}
+				}
+			}
+		}
+		
+		return table;		
+	}
+	/*
+	static HashMap <Vertex, HashMap <Vertex, Integer>> johnson(Graph graph) {
+		HashMap <Vertex, HashMap <Vertex, Integer>> table = new HashMap <Vertex, HashMap <Vertex, Integer>> ();
+		for(Vertex vertex : graph.getVertices()) {
+			table.put(vertex, new HashMap <Vertex, Integer> ());
+		}
+		
+		int[][] weights = new int[graph.getVerticesSize()+1][graph.getVerticesSize()+1];
+		for(int i = 0; i < )
+		Graph newGraph = new Graph(new Matrix(weights), );
+	}
+	*/
 }
